@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>SISPE - Sistema de Ponto Eletrônico UEMA</title>
+
+    <meta name="description" content="SISPE - Sistema de Ponto Eletrônico UEMA">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="../static/images/brasao_uema.png" th:href="@{/images/brasao_uema.png}" />
+    <link rel="shortcut icon" href="../static/images/brasao-uema1.ico" th:href="@{/images/brasao-uema1.ico}" />
+
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css}">
+    <link rel="stylesheet"
+        th:href="@{https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css}">
+    <link rel="stylesheet"
+        th:href="@{https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+    <link th:href='@{https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800}' rel='stylesheet'
+        type='text/css'>
+    <script type="text/javascript" th:src="@{https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <style>
+        body {
+            overflow: hidden;
+            min-width: 100%;
+            min-height: 100%;
+            flex: 1;
+            background-attachment: fixed;
+            background-color: #E7E7E7;
+        }
+
+        #img-background {
+            width: 100%;
+            height: 73%;
+            margin-left: 5px;
+        }
+
+        #img-logo {
+            height: 125px;
+            width: auto;
+            margin-top: -40px;
+            margin-bottom: -20px;
+            margin-left: -10px;
+        }
+
+        #img-device {
+            display: none;
+        }
+
+        .login-form {
+            background-color: #E7E7E7;
+            margin-left: 15px;
+            margin-right: -10px
+        }
+
+        .social-login-content {
+            margin-top: -10px;
+            background-color: #E7E7E7;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            body {
+                overflow: scroll;
+                flex: 1;
+                float: initial;
+                flex-direction: column;
+                display: initial;
+                text-align: left;
+                background-attachment: fixed;
+                background-color: #E7E7E7;
+            }
+
+            #img-logo {
+                height: 100%;
+                width: 85%;
+                display: inline-block;
+                margin-left: 25px;
+            }
+
+            #img-background {
+                display: none;
+            }
+
+            #img-device {
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+                margin-left: 30px;
+
+            }
+
+            #device-display {
+                flex: fit-content;
+            }
+
+            #div-lateral {
+                display: none;
+            }
+
+            .login-form {
+                background-color: #E7E7E7;
+                margin-left: 15px;
+                margin-right: -10px
+            }
+
+            .social-login-content {
+                margin-top: -10px;
+                background-color: #E7E7E7;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="small-device">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="row login col-md-12 pl-0 pr-0">
+            <div class="col-md-8 pl-0 pr-0" id="div-lateral">
+                <img src="../static/images/SISPE.png" th:src="@{/images/SISPE.png}" id="img-background">
+            </div>
+
+            <div class="col-md-4  pl-0 pr-0" id="device-display">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="../static/images/logo-Sispe.png" th:src="@{/images/logo-Sispe.png}" id="img-device">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="hidden-xs">
+                    <div class="clearfix">
+                        <div class="login-content">
+                            <div class="login-logo">
+                                <a th:href="@{/login}">
+                                    <img class="align-content fc-center hidden-xs " src="../static/images/logouema.png"
+                                        th:src="@{/images/logouema.png}" alt="Logo da Universidade Estadual do Maranhão"
+                                        id="img-logo">
+                                </a>
+
+                            </div>
+                            <div class="login-form flex-fill">
+                                <form th:action="@{/login}" method="post">
+                                    <div class="form-group">
+                                        <label>CPF </label>
+                                        <input type="text" id="username" name="username" autofocus="autofocus"
+                                            class="form-control cpf-mask" placeholder="Digite seu CPF" required>
+                                        <small class="form-text text-muted"> ex: 000.000.000-00</small>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Senha</label>
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            placeholder="Digite sua Senha" required>
+                                        <small class="form-text text-muted"> ex: 123A56#@9</small>
+                                    </div>
+
+                                    <div class="checkbox" style="margin-bottom: 5px">
+                                        <label>
+                                            <input type="checkbox" name="remember-me"> Lembrar-me
+                                        </label>
+                                        <label class="pull-right">
+                                            <a href="#">Esqueceu a Senha?</a>
+                                        </label>
+
+                                    </div>
+
+                                    <button name="submit" type="submit" value="submit" class="btn btn-success"
+                                        style="margin-bottom: 5px">
+                                        <i class="ti-user"></i>
+                                        Entrar
+                                    </button>
+
+                                    <div class="social-login-content flex-wrap">
+                                        <div class="social-button ">
+                                            <button type="button" class="btn social facebook btn-flat btn-addon mb-3"
+                                                id="btn-enroll" style="text-align: center"><i
+                                                    class="ti-facebook"></i>Cadastre-se com Facebook
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="register-link m-t-15 text-center" style="margin-top: -20px">
+                                        <p>Ainda não possui Cadastro? <a href="#"> Cadastre-se Aqui!</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#request.getParameter('error') == 'true'}" class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Erro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Usuário e/ou senha inválidos!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#smallmodal').modal('show');
+    })
+</script>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js}"></script>
+<script src="/static/assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
+
+</html>

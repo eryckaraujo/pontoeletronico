@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Informações Usuário</title>
+    <style>
+        body {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Include _menu.html -->
+
+    <a th:href="@{/}">Home</a>
+
+    | &nbsp;
+
+    <a th:href="@{/userInfo}">Informações do Usuário</a>
+
+    | &nbsp;
+
+    <a th:href="@{/admin}">Admin</a>
+
+    | &nbsp;
+
+    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}"> Sair </a>
+      
+      <h2>Informações do Usuário</h2>
+      <h3>Bem Vindo : <span th:utext="${#request.userPrincipal.name}"></span></h3>
+      <b>Esta é uma Página Protegida</b> 
+       
+      <br/><br/>
+       
+      <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+       
+   </body>
+    
+</html>

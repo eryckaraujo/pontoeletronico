@@ -1,0 +1,146 @@
+<!doctype html>
+<html class="no-js" lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/layout :: cabecalho">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title id="titulo">Editar Terminal</title>
+</head>
+
+<body>
+    <!-- Left Panel -->
+    <aside th:replace="layouts/layout :: menu_principal">
+        <!-- /#left-panel -->
+    </aside>
+
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <header th:replace="layouts/layout :: header"></header>
+        <!-- /#Header-->
+        <!-- Content -->
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Terminal</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="#">Terminais</a></li>
+                                    <li><a href="#">Editar </a></li>
+                                    <li class="active">Dados</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+
+            <div class="animated fadeIn">
+                <div class="row">
+
+                    <div th:replace="funcionario/funcionarioAdd :: mensagens_validacao"> </div>
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header"><strong>Editar Dados do Terminal</strong></div>
+                            <div class="card-body card-block">
+
+                                <form th:object="${terminalDto}" th:action="@{/terminal/edit/{id}}" method="POST"
+                                    class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                                    <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                        <span th:text="${detailedError.message}"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">ID</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control input-sm" id="id" th:field="*{id}"
+                                        readOnly="readonly"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" th:classappend="${#fields.hasErrors('departamento')}? 'has-error'">
+                                <label class="form-control-label">Departamento</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+                                    <input type="text" class="form-control input-sm" th:field="*{departamento}"
+                                    autofocus="autofocus" placeholder="Informe o Departamento Responsável" maxlength="200"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">MAC</label>
+                                <div class="input-group" th:classappend="${#fields.hasErrors('mac')}? 'has-error'">
+                                    <div class="input-group-addon"><i class="fa fa-sitemap"></i></div>
+                                    <input type="text" class="form-control input-sm" th:field="*{mac}" minlength="17"
+                                    placeholder="Informe o Endereço MAC do Terminal"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Unidade de Trabalho</label>
+                                <div class="input-group"
+                                    th:classappend="${#fields.hasErrors('unidade_trabalho')}? 'has-error'">
+                                    <div class="input-group-addon"><i class="fa  fa-desktop"></i></div>
+                                    <input type="text" class="form-control input-sm" th:field="*{unidade_trabalho}"
+                                    maxlength="200"
+                                    placeholder="Informe a Unidade de Trabalho"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Horario</label>
+                                <div class="input-group" th:classappend="${#fields.hasErrors('horario')}? 'has-error'">
+                                    <div class="input-group-addon"><i class="fa  fa-clock-o"></i></div>
+                                    <input type="time" class="form-control input-sm" th:field="*{horario}" 
+                                    maxlength="20" 
+                                    placeholder="Informe o Horario de Trabalho do Terminal"/>
+                                </div>  <p>Hrs </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Carga Horária</label>
+                                <div class="input-group" th:classappend="${#fields.hasErrors('carga_horaria')}? 'has-error'">
+                                    <div class="input-group-addon"><i class="fa fa-clock-o"></i></div>
+                                    <input type="time" class="form-control input-sm" th:field="*{carga_horaria}"/>
+                                </div> <p>Hrs</p>
+                            </div>
+
+                            <div class="form-actions form-group">
+                                <button type="submit" class="btn btn-md btn-primary" style="margin: 5px">Salvar</button>
+                                <a th:href="@{/terminal/listar}" class="btn btn-md btn-danger" style="margin: 5px">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /#Content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <footer th:replace="layouts/layout :: footer"></footer>
+    <!-- /.Site-Footer -->
+</div>
+<!-- /#Right Panel -->
+<div th:replace="layouts/layout :: scripts"></div>
+</body>
+</html>
